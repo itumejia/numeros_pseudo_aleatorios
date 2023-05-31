@@ -1,3 +1,5 @@
+import math
+
 def printListValues(list):
     if len(list) == 0:
         print('\n', end='')
@@ -43,7 +45,9 @@ def getMedia(numbers):
     total = 0
     for n in numbers:
         total += n
-    print(total / len(numbers))
+    media = total/len(numbers)
+    print(media)
+    return media
 
 # Calcula mediana, el arreglo debe estar ordenado
 def getMediana(numbers):
@@ -91,6 +95,14 @@ def getModa(numbers):
         printListValues(modas)
 
 
+def getDesviacionYVarianza(numbers, media):
+    suma = 0
+    for n in numbers:
+        suma += (n - media) ** 2
+    varianza = suma / (len(numbers)-1)
+    desviacion = math.sqrt(varianza)
+    print(desviacion)
+    print(varianza)
 
 # getRandomNumbers(9876, 48271, 0, 9999, 10)
 numbers = getRandomNumbersAndDisplayDetails(5, 5, 1, 16, 18)
@@ -102,7 +114,8 @@ print('sorted')
 printListValues(sortedNumbers)
 
 # TODO: sacar media, mediana, moda, dev est, varianza, subintervalos con arreglo numbers
-getMedia(numbers)
+media = getMedia(numbers)
 getMediana(sortedNumbers)
 getModa(sortedNumbers)
+getDesviacionYVarianza(numbers, media)
 
