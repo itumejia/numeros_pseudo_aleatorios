@@ -1,7 +1,9 @@
-def printListValues(list, start, end):
-    for i in range(start, end+1):
+def printListValues(list):
+    if len(list) == 0:
+        print('\n', end='')
+    for i in range(len(list)):
         # Si es el ultimo valor, no imprimir coma y agregar <ENTER>
-        if i == end:
+        if i == len(list) - 1:
             print(list[i])
         else: 
             print(list[i], end=", ")
@@ -24,13 +26,13 @@ def getRandomNumbersAndDisplayDetails(seed, mult, corr, mod, n):
 
     # Imprimir valores de la cola
     print('cola')
-    printListValues(result, 0, cola_ends_at)
+    printListValues(result[:cola_ends_at+1])
     # Imprimir valores del periodo
     print('period')
-    printListValues(result, 0, period_ends_at)
+    printListValues(result[:period_ends_at+1])
     # Imprimir valores del ciclo
     print('ciclo')
-    printListValues(result, cola_ends_at+1, period_ends_at)
+    printListValues(result[cola_ends_at+1:period_ends_at+1])
     # Imprimir longitudes
     print(cola_ends_at+1)
     print(period_ends_at+1)
@@ -43,9 +45,54 @@ def getMedia(numbers):
         total += n
     print(total / len(numbers))
 
+def getModa(numbers):
+    modas = []
+    highest = 0
+    currentNumber = None
+    currentScore = 0
+    i = 0
+    while i < len(numbers):
+        # Cambio de numero, checar si el anterior numero es una moda
+        if currentNumber != numbers[i]:
+            # Nueva moda definitiva
+            if currentScore > highest:
+                modas = [currentNumber]
+                highest = currentScore
+            # Nueva moda igual a la anterior
+            elif currentScore == highest:
+                modas.append(currentNumber)
+            # Actualizar valores
+            currentNumber = numbers[i]
+            currentScore = 1
+        else:
+            currentScore += 1
+        i += 1
+
+    # Revisar si el ultimo valor es moda
+    if currentScore > highest:
+        modas = [currentNumber]
+        highest = currentScore
+    elif currentScore == highest:
+        modas.append(currentNumber)
+    
+    # Si la moda no tiene repeticion, entonces no es realmente moda
+    if highest == 1:
+        printListValues([])
+    else:        
+        printListValues(modas)
+
+
+
 # getRandomNumbers(9876, 48271, 0, 9999, 10)
-numbers = getRandomNumbersAndDisplayDetails(5, 5, 1, 16, 17)
+numbers = getRandomNumbersAndDisplayDetails(5, 5, 1, 16, 18)
+sortedNumbers = sorted(numbers)
+
+print('original')
+printListValues(numbers)
+print('sorted')
+printListValues(sortedNumbers)
 
 # TODO: sacar media, mediana, moda, dev est, varianza, subintervalos con arreglo numbers
 getMedia(numbers)
+getModa(sortedNumbers)
 
