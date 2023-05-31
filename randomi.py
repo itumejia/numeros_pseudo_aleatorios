@@ -104,6 +104,34 @@ def getDesviacionYVarianza(numbers, media):
     print(desviacion)
     print(varianza)
 
+# Calcula 10 intervalos, el arreglo debe estar ordenado
+def getIntervalos(numbers):
+    highest = numbers[-1]
+    rangos = []
+    # Definir los rangos de los intervalos
+    for i in range(1,11):
+        rangos.append(highest*(i/10))
+
+    rangoIndex = 0
+    rangoActual = rangos[rangoIndex]
+    countRango = 0
+    i = 0
+    # Calcular porcentaje de numeros que entran a ese intervalo
+    while i < len(numbers):
+        if numbers[i] <= rangoActual:
+            countRango += 1
+            i += 1
+        # Se termino un rango
+        else:
+            porcentaje = (countRango/len(numbers)) * 100 if countRango != 0 else 0
+            print(porcentaje)
+            rangoIndex += 1
+            rangoActual = rangos[rangoIndex]
+            countRango = 0
+    porcentaje = (countRango/len(numbers)) * 100 if countRango != 0 else 0
+    print(porcentaje)
+
+
 # getRandomNumbers(9876, 48271, 0, 9999, 10)
 x0 = int(input())
 a = int(input())
@@ -113,14 +141,13 @@ cuantos = int(input())
 numbers = getRandomNumbersAndDisplayDetails(x0, a, c, m, cuantos)
 sortedNumbers = sorted(numbers)
 
-print('original')
-printListValues(numbers)
-print('sorted')
-printListValues(sortedNumbers)
-
 # TODO: sacar media, mediana, moda, dev est, varianza, subintervalos con arreglo numbers
+print('mmm')
 media = getMedia(numbers)
 getMediana(sortedNumbers)
 getModa(sortedNumbers)
+print('desv, var')
 getDesviacionYVarianza(numbers, media)
+print('intervalos')
+getIntervalos(sortedNumbers)
 
