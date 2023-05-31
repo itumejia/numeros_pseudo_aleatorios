@@ -105,7 +105,12 @@ def getDesviacionYVarianza(numbers, media):
     print(varianza)
 
 # getRandomNumbers(9876, 48271, 0, 9999, 10)
-numbers = getRandomNumbersAndDisplayDetails(5, 5, 1, 16, 18)
+x0 = int(input())
+a = int(input())
+c = int(input())
+m = int(input())
+cuantos = int(input())
+numbers = getRandomNumbersAndDisplayDetails(x0, a, c, m, cuantos)
 sortedNumbers = sorted(numbers)
 
 print('original')
