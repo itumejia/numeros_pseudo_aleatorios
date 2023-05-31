@@ -45,6 +45,15 @@ def getMedia(numbers):
         total += n
     print(total / len(numbers))
 
+# Calcula mediana, el arreglo debe estar ordenado
+def getMediana(numbers):
+    # El numero de valores es par
+    if len(numbers)%2 == 0:
+        print((numbers[len(numbers)//2] + numbers[(len(numbers)//2)-1])/2)
+    else:
+        print(numbers[len(numbers)//2])
+
+# Calcula moda, el arreglo debe estar ordenado
 def getModa(numbers):
     modas = []
     highest = 0
@@ -94,5 +103,6 @@ printListValues(sortedNumbers)
 
 # TODO: sacar media, mediana, moda, dev est, varianza, subintervalos con arreglo numbers
 getMedia(numbers)
+getMediana(sortedNumbers)
 getModa(sortedNumbers)
 
